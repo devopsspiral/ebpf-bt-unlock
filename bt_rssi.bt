@@ -1,0 +1,8 @@
+#!/snap/bin/bpftrace
+
+kprobe:mgmt_device_found
+{
+$mac1=*(arg1+3) & 0xffffff;
+$mac2=*(arg1) & 0xffffff;
+printf("%X%X %d\n", $mac1,$mac2, arg5);
+}

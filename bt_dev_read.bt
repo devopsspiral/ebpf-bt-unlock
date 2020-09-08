@@ -1,0 +1,11 @@
+#!/snap/bin/bpftrace
+
+#include <net/bluetooth/bluetooth.h>
+#include <net/bluetooth/hci_core.h>
+
+
+kprobe:mgmt_device_found
+{
+$dev=( struct hci_dev *) arg0;
+printf("%s\n", $dev->name);
+}
